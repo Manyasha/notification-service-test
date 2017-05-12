@@ -1,0 +1,186 @@
+.datetimepicker-container {
+  position: relative;
+  .bootstrap-datetimepicker-widget {
+    background-color: rgba(231, 231, 231, 0.37);
+    border: 1px solid #ebebeb;
+    border-radius: 15px;
+    margin-top: 10px !important;
+    margin-left: 200px !important;
+    width: 410px !important;
+    position: relative;
+    top: -20px !important;
+
+    .row {
+      height: 170px;
+    }
+    &.dropdown-menu.bottom:before {
+      top: -7px;
+    }
+  }
+  .picker-switch a {
+    float: right;
+    height: 25px;
+    padding: 0 !important;
+  }
+  .datepicker {
+    width: 300px;
+  }
+  .timepicker {
+    width: 100px;
+    position: relative;
+    top: -160px;
+    left: 300px;
+  }
+}
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('/theme/fonts/icomoon/fonts/filmon-icon.eot');
+  src: url('/theme/fonts/icomoon/fonts/filmon-icon.eot?#iefix') format('embedded-opentype'),
+  url('/theme/fonts/icomoon/fonts/filmon-icon.woff') format('woff'),
+  url('/theme/fonts/icomoon/fonts/filmon-icon.ttf') format('truetype'),
+  url('/theme/fonts/icomoon/fonts/filmon-icon.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-time:before {
+  content: "\e601";
+}
+.glyphicon-chevron-left:before {
+  content: "\004c";
+}
+.glyphicon-chevron-right:before {
+  content: "\0052";
+}
+.glyphicon-chevron-up:before {
+  content: "\005f";
+}
+.glyphicon-chevron-down:before {
+  content: "\0061";
+}
+.glyphicon-remove:before {
+  content: "\0058";
+}
+.main-container {
+  width: 490px;
+  margin: 0 auto 50px;
+  background: #fff;
+  padding: 10px 45px;
+  border: 1px solid #d8d8d8;
+  box-sizing: border-box;
+  .form-container {
+    width: 400px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    text-align: center;
+  }
+}
+.notifications-container {
+  .button {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    background: #5cb85c;
+    border: 1px solid #5cb85c;
+    border-radius: 3px;
+    color: #fff;
+    &:hover {
+      background: #449d44;
+    }
+    &:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      &:hover {
+        background: #5cb85c;
+      }
+    }
+  }
+  label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  input {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 400px;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+    &[type=file]{
+      width: 380px;
+    }
+  }
+  textarea {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 400px;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+  }
+  .error {
+    border: 1px solid #ee4343!important;
+  }
+  .error-msg {
+    margin-top: 5px;
+    color: #ee4343;
+  }
+  .invalid-datetime {
+    margin-left: 210px;
+    margin-top: -15px !important;
+    font-size: 10px;
+  }
+  .radio {
+    font-size: 14px;
+    p {
+      margin-bottom: 15px;
+    }
+    input[type=radio] {
+      width: 30px;
+    }
+  }
+  img {
+    width: 70px;
+    height: 70px;
+    display: block;
+  }
+  #remove-img {
+    cursor: pointer;
+    float: right;
+    display: none;
+    position: relative;
+  }
+  #success-message {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 15px;
+    display: none;
+  }
+  #datetime {
+    margin-left: 210px;
+    top: -23px;
+    position: relative;
+    width: 190px;
+  }
+}
+.form-container.required label:after {
+  content: '*';
+  color: red;
+}
+.info-msg {
+  color: #524848 !important;
+  font-size: 13px !important;
+  top: -20px !important;
+}
+#payload-container div {
+  display: none;
+}

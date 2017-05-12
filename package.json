@@ -1,0 +1,36 @@
+{
+  "name": "push-notification-delivery-test-tool",
+  "version": "1.0.0",
+  "description": "Push Notification Delivery Test Tool",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "./node_modules/gulp/bin/gulp.js"
+  },
+  "author": {
+    "name": "Marina Tsymbal",
+    "email": "marina.tsymbal@filmon.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "gulp-webserver": "^0.9.1",
+    "visual-search": "https://github.com/documentcloud/visualsearch.git"
+  },
+  "homepage": "http://www.filmon.com/",
+  "bugs": {
+    "url": "http://pm.filmon.com:8080/browse/FILMONCOM"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  }
+}

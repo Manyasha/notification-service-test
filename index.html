@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" >
+
+<head>
+    <title>Test Push Notifications</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="dist/style.css" rel="stylesheet"/>
+    <script src="dist/app.js"></script>
+</head>
+
+<body>
+<div>
+    <div class="main-container">
+        <h1>Test Push Notifications</h1>
+        <form class="notifications-container" id="js-notification-form">
+            <h3>Type</h3>
+            <div class="form-container">
+                <select id="type">
+                    <option value="FILMON_INFO">FILMON_INFO</option>
+                    <option value="DVR_RECORDED">DVR_RECORDED</option>
+                    <option value="ANDROID_APP_BUILT">ANDROID_APP_BUILT</option>
+                    <option value="ANDROID_APP_BUILD_FAILED">ANDROID_APP_BUILD_FAILED</option>
+                    <option value="TVGUIDE_REMINDER">TVGUIDE_REMINDER</option>
+                    <option value="LIVE_EVENT">LIVE_EVENT</option>
+                </select>
+            </div>
+            <hr>
+
+            <h3>Recipients</h3>
+            <div id="recipients-container">
+                <div class="form-container">
+                    <input type="text" id="recipients" class="isRequired"/>
+                    <label for="recipients"></label>
+                </div>
+            </div>
+            <hr>
+
+            <h3>Payload</h3>
+            <div id="payload-container">
+                <div class="form-container required">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" class="isRequired">
+                </div>
+                <div class="form-container required">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" class="isRequired"></textarea>
+                </div>
+                <div class="form-container">
+                    <label for="channelId">Channel Id</label>
+                    <input type="text" id="channelId" name="channelId" class="isNum">
+                </div>
+                <div class="form-container">
+                    <label for="channelTitle">Channel Title</label>
+                    <input type="text" id="channelTitle" name="channelTitle">
+                </div>
+                <div class="form-container">
+                    <label for="recordingId">Recording Id</label>
+                    <input type="text" id="recordingId" name="recordingId" class="isNum">
+                </div>
+                <div class="form-container">
+                    <label for="interval">Interval</label>
+                    <input type="text" id="interval" name="interval" class="isNum">
+                </div>
+                <div class="form-container">
+                    <label for="startTimeMs">StartTime (ms)</label>
+                    <input type="text" id="startTimeMs" name="startTimeMs" class="isNum">
+                </div>
+                <div class="form-container">
+                    <label for="programmeId">Programme Id</label>
+                    <input type="text" id="programmeId" name="programmeId">
+                </div>
+                <div class="form-container">
+                    <label for="url">Url</label>
+                    <input type="text" id="url" name="url">
+                </div>
+                <div class="form-container">
+                    <label for="programmeDescription">Programme Description</label>
+                    <input type="text" id="programmeDescription" name="programmeDescription">
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container">
+                <button class="button js-send-notification" type="button" id="submit">Send Notification</button>
+            </div>
+            <div id="success-message" class="form-container">
+
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
