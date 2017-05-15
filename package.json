@@ -4,6 +4,7 @@
   "description": "Push Notification Delivery Test Tool",
   "main": "src/index.js",
   "scripts": {
+    "install-external-deps" : "if [ ! -d node_modules/visual-search ] ; then git clone https://github.com/documentcloud/visualsearch.git -b 0.5.1 node_modules/visual-search ; fi", 
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "./node_modules/gulp/bin/gulp.js",
     "server": "/usr/bin/node ./devserver.js"
@@ -15,8 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2",
-    "gulp-webserver": "^0.9.1",
-    "visual-search": "https://github.com/documentcloud/visualsearch.git"
+    "gulp-webserver": "^0.9.1"
   },
   "homepage": "http://www.filmon.com/",
   "bugs": {
