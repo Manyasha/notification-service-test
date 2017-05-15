@@ -3,31 +3,52 @@ import renderSearchRecipients from './searchRecipients';
 
 const config = require('../../appConfig');
 
-const relations = {
-    FILMON_INFO: '#title, #description, #icon, #url',
-    DVR_RECORDED: '#title, #description, #channelId, #channelTitle, #icon, #recordingId',
-    ANDROID_APP_BUILT: '#url',
-    ANDROID_APP_BUILD_FAILED: '#url',
-    TVGUIDE_REMINDER: '#title, #description, #channelId, #channelTitle, #icon, #interval, #startTimeMs, #programmeId, #programmeDescription',
-    LIVE_EVENT: '#title, #description, #channelId, #icon, #startTimeMs, #url'
-};
-
 const defaultIcon = "https://static.filmon.com/theme/img/filmon_logo_106.png";
 
 $(() => {
-    let $form = $("#js-notification-form"),
-        $type = $('#type'),
-        $successDiv = $("#success-message"),
+    let $type = $('#type'),
+        $messageDiv = $("#message-block"),
+        $submit = $('#submit'),
         $recipientsContainer = $('#recipients-container'),
-        $search = renderSearchRecipients($recipientsContainer.find('input'));
+        $search = renderSearchRecipients($recipientsContainer.find('input')),
+        messageTimer = null;
 
-    $(relations[$type.val()]).parent().show();
+    showPayloads();
+    markAsRequired();
 
     $type.change(() => {
         $('.error-msg').remove();
         $('#payload-container div:visible').hide();
-        $(relations[$type.val()]).val('').removeClass('error').parent().show();
+        markAsNonRequired();
+        $(config.relatedFields[$type.val()]).val('').removeClass('error').parent().show();
+        markAsRequired();
     });
+
+    $submit.click(() => {
+        if ( !isValidForm() || !$search.isValid() ) {
+            return;
+        }
+        let recipients = $search.getValue();
+        let payload = {
+            "type": $type.val()
+        };
+        $(config.relatedFields[$type.val()]).each((i, el) => payload[$(el).attr('id')] = $(el).val());
+
+        const data = {recipients: recipients, payload: payload};
+        sendNotification({data: JSON.stringify(data)});
+    });
+
+    function showPayloads() {
+        $(config.relatedFields[$type.val()]).parent().show();
+    }
+
+    function markAsRequired() {
+        $(config.requiredFields[$type.val()]).addClass('isRequired').parent().addClass('required');
+    }
+
+    function markAsNonRequired() {
+        $('.isRequired').removeClass('isRequired').parent().removeClass('required');
+    }
 
     function appendError($el, msg) {
         const html = `<span class="error-msg">${msg}</span>`;
@@ -40,9 +61,17 @@ $(() => {
            });
     }
 
+    function showMessage(msg, type) {
+        $messageDiv.removeClass().addClass(`${type}-message`).show().html(msg);
+        clearTimeout(messageTimer);
+        messageTimer = setTimeout(function () {
+            $messageDiv.html('').hide();
+        }, 5000);
+    }
+
     function isValidForm() {
         let isValid = true;
-        $('.isRequired').each((i, el) => {
+        $('.isRequired').filter(':visible').each((i, el) => {
             if ( $(el).val() ){
                 return;
             }
@@ -50,7 +79,7 @@ $(() => {
             appendError($(el), msg);
             isValid = false;
         });
-        $('.isNum').each((i, el) => {
+        $('.isNum').filter(':visible').each((i, el) => {
             if ( /^[0-9]+$/.test($(el).val()) ){
                 return;
             }
@@ -61,18 +90,23 @@ $(() => {
         return isValid;
     }
 
-    $('#submit').click(() => {
-        if ( !isValidForm() || !$search.isValid() ) {
-            return;
-        }
-
-        let recipients = $search.getValue();
-        let payload = {
-            "type": $type.val()
-        };
-        $(relations[$type.val()]).each((i, el) => payload[$(el).attr('id')] = $(el).val());
-
-        let data = {recipients: recipients, payload: payload};
-        window.console.log(data);
-    });
+    function sendNotification(data) {
+        $.ajax({
+            url: "/send-notification",
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            beforeSend: function () {
+                $submit.prop('disabled', true);
+                showMessage('Processing...please wait', 'info');
+            }
+        }).done(() => showMessage("Notification has been successfully sent", 'success')
+        ).fail(error => {
+            if( error.status === 202 ) {
+                showMessage("Notification has been accepted", 'success')
+            }
+            showMessage('Internal server error', 'error');
+            }
+        ).always(() => $submit.prop('disabled', false));
+    }
 });

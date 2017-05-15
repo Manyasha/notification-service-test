@@ -5,8 +5,8 @@
     <title>Test Push Notifications</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="dist/style.css" rel="stylesheet"/>
-    <script src="dist/app.js"></script>
+    <link href="style.css" rel="stylesheet"/>
+    <script src="app.js"></script>
 </head>
 
 <body>
@@ -38,13 +38,13 @@
 
             <h3>Payload</h3>
             <div id="payload-container">
-                <div class="form-container required">
+                <div class="form-container">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="isRequired">
+                    <input type="text" id="title" name="title">
                 </div>
-                <div class="form-container required">
+                <div class="form-container">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10" class="isRequired"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-container">
                     <label for="channelId">Channel Id</label>
@@ -71,12 +71,16 @@
                     <input type="text" id="programmeId" name="programmeId">
                 </div>
                 <div class="form-container">
-                    <label for="url">Url</label>
-                    <input type="text" id="url" name="url">
+                    <label for="programmeTitle">Programme Title</label>
+                    <input type="text" id="programmeTitle" name="programmeTitle">
                 </div>
                 <div class="form-container">
                     <label for="programmeDescription">Programme Description</label>
                     <input type="text" id="programmeDescription" name="programmeDescription">
+                </div>
+                <div class="form-container">
+                    <label for="url">Url</label>
+                    <input type="text" id="url" name="url">
                 </div>
             </div>
             <hr>
@@ -84,8 +88,7 @@
             <div class="form-container">
                 <button class="button js-send-notification" type="button" id="submit">Send Notification</button>
             </div>
-            <div id="success-message" class="form-container">
-
+            <div id="message-block" class="form-container error-message">
             </div>
         </form>
     </div>

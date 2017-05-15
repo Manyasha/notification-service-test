@@ -158,12 +158,24 @@
     display: none;
     position: relative;
   }
-  #success-message {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+  #message-block {
     padding: 15px;
     display: none;
+    .success-message {
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+    }
+    .error-message {
+      color: rgba(231, 25, 19, 0.66);
+      background-color: rgba(248, 160, 157, 0.51);
+      border-color: rgba(255, 158, 163, 0.71);
+    }
+    .info-message {
+      color: rgba(231, 25, 19, 0.66);
+      background-color: rgba(248, 160, 157, 0.51);
+      border-color: rgba(255, 158, 163, 0.71);
+    }
   }
   #datetime {
     margin-left: 210px;

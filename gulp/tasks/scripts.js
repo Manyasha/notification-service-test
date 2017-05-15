@@ -9,8 +9,8 @@ gulp.task('scripts', () => {
         .pipe(browserify({
             insertGlobals : true
         }))
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./maps'))
+        //.pipe(sourcemaps.init())
+        //.pipe(uglify())
+        //.pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest(config.scripts.dest));
 });

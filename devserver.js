@@ -1,37 +1,53 @@
-var url = require('url');
+const url = require('url');
+const bodyParser = require('body-parser')
+const qhttp = require('q-io/http');
+const express = require('express');
 
-var express = require('express');
-var app = express();
+let app = express();
+
+app.use( bodyParser.json() );
+app.use( bodyParser.urlencoded({ extended: true }) );
 
 app.get('/search', function (req, res) {
-    var qhttp = require('q-io/http');
-    var lookupServiceUri = require('./appConfig').LOOKUP_SERVICE_URL;
+    const lookupServiceUri = require('./appConfig').LOOKUP_SERVICE_URL;
+    const lookupUrl = lookupServiceUri + 'lookup?limit=100&q=' + encodeURIComponent(req.query.term);
 
-    var lookupUrl = lookupServiceUri + 'lookup?limit=100&q=' + encodeURIComponent(req.query.term);
-    console.log(lookupUrl)
     qhttp.read(lookupUrl)
-        .then((data) => data.toString('utf-8') )
+        .then(data => data.toString('utf-8') )
         .then(JSON.parse)
-        .then((data) => {
-
-            res.json(data.data.map(
-                (i) => {
-                    i.name = i.login
-                    return i;
-                }
-            ));
-        })
-        .fail(() => { res.fail(500); } );
+        .then(data => res.json(data.data))
+        .fail((e) => res.sendStatus(e.response.status || 500));
 });
 
 app.post('/send-notification', function(req, res) {
+    const notificationsServiceUri = require('./appConfig').NOTIFICATIONS_SERVICE_URL;
+    const notificationsUrl = notificationsServiceUri + 'event';
 
+    const body = req.body.data;
+    const headers = {
+        'Content-Type': 'application/json'
+    };
 
+    const request = {
+        url: notificationsUrl,
+        charset: 'UTF-8',
+        method: 'POST',
+        headers: headers,
+        body: [body]
+    };
 
+    qhttp.read(request)
+        .then(data => data.toString('utf-8') )
+        .then(JSON.parse)
+        .then(response => res.json({code: response.status, text: response.statusText}))
+        .fail(e => res.sendStatus(e.response.status || 500));
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/dist/index.html');
 });
 
 app.use(express.static(__dirname + '/dist'));
-
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

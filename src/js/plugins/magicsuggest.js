@@ -1117,7 +1117,7 @@
                     newSuggestions = [],
                     selectedValues = ms.getValue();
                 // filter the data according to given input
-                if(q.length > 0) {
+                /*if(q.length > 0) {
                     $.each(data, function(index, obj) {
                         var name = obj[cfg.displayField];
                         if((cfg.matchCase === true && name.indexOf(q) > -1) ||
@@ -1126,11 +1126,12 @@
                                 filtered.push(obj);
                             }
                         }
+                        filtered.push(obj);
                     });
                 }
-                else {
+                else {*/
                     filtered = data;
-                }
+                //}
                 // take out the ones that have already been selected
                 $.each(filtered, function(index, obj) {
                     if (cfg.allowDuplicates || $.inArray(obj[cfg.valueField], selectedValues) === -1) {
