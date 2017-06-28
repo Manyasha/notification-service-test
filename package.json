@@ -1,10 +1,9 @@
 {
   "name": "push-notification-delivery-test-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Push Notification Delivery Test Tool",
   "main": "src/index.js",
   "scripts": {
-    "install-external-deps" : "if [ ! -d node_modules/visual-search ] ; then git clone https://github.com/documentcloud/visualsearch.git -b 0.5.1 node_modules/visual-search ; fi", 
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "./node_modules/gulp/bin/gulp.js",
     "server": "/usr/bin/node ./devserver.js"
@@ -14,9 +13,26 @@
     "email": "marina.tsymbal@filmon.com"
   },
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "bootstrap": "^3.3.7",
     "express": "^4.15.2",
-    "gulp-webserver": "^0.9.1"
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-help": "^1.6.1",
+    "gulp-less": "^3.3.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-stats": "0.0.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "gulp-webserver": "^0.9.1",
+    "require-dir": "^0.3.2",
+    "visualsearch": "^0.6.7"
   },
   "homepage": "http://www.filmon.com/",
   "bugs": {
